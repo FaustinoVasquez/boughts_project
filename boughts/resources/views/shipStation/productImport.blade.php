@@ -1,0 +1,32 @@
+<table>
+    <tbody>
+    @foreach($productsImport as $productImport)
+        <tr>
+            <td>{{$productImport->SKU}}</td>
+            <td>{{$productImport->Name}}</td>
+            <td>{{$productImport->WarehouseLocation}}</td>
+            <td>{{$productImport->WeightOz}}</td>
+            <td>{{$productImport->Category}}</td>
+            <td>{{$productImport->Tag1}}</td>
+            <td>{{$productImport->Tag2}}</td>
+            <td>{{$productImport->Tag3}}</td>
+            <td>{{$productImport->Tag4}}</td>
+            <td>{{$productImport->Tag5}}</td>
+            <td>{{$productImport->CustomsDescription}}</td>
+            <td>{{$productImport->CustomsValue}}</td>
+            <td>{{$productImport->CustomsTariffNo}}</td>
+            <td>{{$productImport->CustomsCountry}}</td>
+            <td>{{$productImport->ThumbnailUrl}}</td>
+            <td>{{$productImport->UPC}}</td>
+            <td>{{$productImport->FillSKU}}</td>
+            <td>{{$productImport->Length}}</td>
+            <td>{{$productImport->Width}}</td>
+            <td>{{$productImport->Height}}</td>
+            <td>{{$productImport->UseProductName}}</td>
+            <td>{{$productImport->Active}}</td>
+            <td>{{$productImport->ParentSKU}}</td>
+            <td>{{$productImport->IsReturnable}}</td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
