@@ -42,7 +42,7 @@ class ImagesController extends Controller
     {
         $this->validate($request,[
             'pictureFile' =>
-                'required|image|mimes:jpeg,png,jpg,gif|max:3072',
+                'required|mimes:jpeg,png,jpg,gif|max:3072',
             'id'=> 'required', //'id' or 'sku'
             'name'=> 'required',  //129552-002 or RMTC05058-001
             'url'=> 'required',  //http://remotespict.mitechnologiesinc.com

@@ -10,11 +10,11 @@ services:
       - ./nginx/snippets:/etc/nginx/snippets:ro
       - ./nginx/conf/fastcgi.conf:/etc/nginx/fastcgi.conf:ro
       - ./boughts:/var/www/
-      - ./logs/nginx:/var/log/nginx 
+      # - ./logs/nginx:/var/log/nginx 
     networks:
       - app-network
     restart: always
-    
+
   php:
     build:
       context: .
@@ -22,12 +22,12 @@ services:
     restart: always
     working_dir: /var/www
     volumes:
-      - ./boughts:/var/www            
-      - ./logs/php:/var/log/php-fpm 
+      - ./boughts:/var/www
+      # - ./logs/php:/var/log/php-fpm 
       # - ./boughts/.env:/var/www/.env
     networks:
       - app-network
-    command: ["php-fpm", "-F"]
+    command: [ "php-fpm", "-F" ]
 
 networks:
   app-network:
