@@ -46,6 +46,13 @@
                                 Account Settings
                             </a>
                         </li>
+                        <li role="presentation" class="divider"></li>
+                        <li class="user-footer bg-light text-center">
+                            <small class="text-muted">
+                                <i class="fa fa-info-circle"></i> Laravel {{ app()->version() }}<br>
+                                <i class="fa fa-code"></i> PHP {{ PHP_VERSION }}
+                            </small>
+                        </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">

@@ -111,6 +111,7 @@ Route::prefix('market')
     ->group(function() {
         Route::get('/','MarketPlaceController@index')->name('index');
         Route::get('getData','MarketPlaceController@getData')->name('getData');
+        Route::get('searchSkus','MarketPlaceController@searchSkus')->name('searchSkus'); // AJAX SKU search
         Route::get('/create','MarketPlaceController@create')->name('create');
         Route::post('/','MarketPlaceController@store')->name('store');
         Route::get('/{mkt}/edit','MarketPlaceController@edit')->name('edit');

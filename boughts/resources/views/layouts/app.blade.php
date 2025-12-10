@@ -46,6 +46,11 @@
                             <div class="dropdown-divider"></div>
                             <a onclick="document.getElementById('logout').submit()" class="dropdown-item" href="#">Cerrar
                                 sesion</a>
+                            <div class="dropdown-divider"></div>
+                            <span class="dropdown-item-text text-muted small">
+                                <i class="fas fa-info-circle"></i> Laravel {{ app()->version() }}<br>
+                                <i class="fas fa-code"></i> PHP {{ PHP_VERSION }}
+                            </span>
                         </div>
                     </li>
                     <form id="logout" action="{{route('logout')}}" method="POST">@csrf</form>

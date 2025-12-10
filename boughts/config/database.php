@@ -43,6 +43,9 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+            // ODBC 18 requires SSL - disable certificate verification for self-signed certs
+            'trust_server_certificate' => true,
+            'encrypt' => true,
         ],
 
     ],

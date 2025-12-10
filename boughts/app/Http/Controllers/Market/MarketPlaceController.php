@@ -55,7 +55,40 @@ class MarketPlaceController extends Controller
      */
     public function create()
     {
-        return Sku::select('SKU')->orderBy('SKU','ASC')->get();
+        // DEPRECATED: Returns empty array - use searchSkus() instead for AJAX
+        return [];
+    }
+
+    /**
+     * AJAX endpoint for SKU search
+     * Used by Select2 dropdowns
+     */
+    public function searchSkus(Request $request)
+    {
+        $term = $request->get('term', '');
+        $page = $request->get('page', 1);
+        $perPage = 20;
+
+        $query = Sku::select('SKU')
+            ->orderBy('SKU', 'ASC');
+
+        if ($term) {
+            $query->where('SKU', 'LIKE', $term . '%');
+        }
+
+        $total = $query->count();
+        $skus = $query->offset(($page - 1) * $perPage)
+            ->limit($perPage)
+            ->get();
+
+        return response()->json([
+            'results' => $skus->map(function($sku) {
+                return ['id' => $sku->SKU, 'text' => $sku->SKU];
+            }),
+            'pagination' => [
+                'more' => ($page * $perPage) < $total
+            ]
+        ]);
     }
 
     /**
@@ -96,7 +129,8 @@ class MarketPlaceController extends Controller
     {
        return  $data=[
             'market'=> $mkt,
-            'sku' => Sku::select('SKU')->orderBy('SKU','ASC')->get()
+            // OPTIMIZED: Don't load all SKUs - use AJAX search instead
+            'sku' => []
         ];
     }
 
@@ -151,12 +185,11 @@ class MarketPlaceController extends Controller
             'ids' =>['required']
         ]);
 
-        foreach ($request->ids as $id){
-            $mkt = Mkt::find($id);
-            $mkt->Floor = $request->bulkFloorPrice;
-            $mkt->Ceiling = $request->bulkCeilingPrice;
-            $mkt->save();
-        }
+        // OPTIMIZED: Use single query instead of N queries (N+1 fix)
+        Mkt::whereIn('ID', $request->ids)->update([
+            'Floor' => $request->bulkFloorPrice,
+            'Ceiling' => $request->bulkCeilingPrice
+        ]);
 
         return response()->json(['success'=>true, 'msg'=>'The skus has been updated']);
 
@@ -164,14 +197,8 @@ class MarketPlaceController extends Controller
 
     public function deleteBulkPrice(Request $request)
     {
-        foreach ($request->ids as $id){
-            $mkt = Mkt::find($id);
-
-           // if($mkt->DumpIt){
-                $mkt->delete();
-          //  }
-
-        }
+        // OPTIMIZED: Use single query instead of N queries (N+1 fix)
+        Mkt::whereIn('ID', $request->ids)->delete();
 
         return response()->json(['success'=>true, 'msg'=>'The SKUs has been deleted']);
 

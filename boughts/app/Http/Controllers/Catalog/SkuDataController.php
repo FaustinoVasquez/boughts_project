@@ -15,6 +15,7 @@ use App\Sku;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 
 
@@ -27,9 +28,15 @@ class SkuDataController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('CategoryID','ASC')->get();
-        $partNumbers =Sku::groupBy('Manufacturer')->pluck('Manufacturer');
+        // OPTIMIZED: Cache categories for 1 hour (3600 seconds)
+        $categories = Cache::remember('categories_list', 3600, function() {
+            return Category::orderBy('CategoryID','ASC')->get();
+        });
 
+        // OPTIMIZED: Cache manufacturers for 1 hour
+        $partNumbers = Cache::remember('manufacturers_list', 3600, function() {
+            return Sku::groupBy('Manufacturer')->pluck('Manufacturer');
+        });
 
         return view('catalog.index', [
             'view' => 'SkuData',
@@ -96,7 +103,10 @@ class SkuDataController extends Controller
      */
     public function create()
     {
-        return $categories = Category::orderBy('CategoryID','ASC')->get();
+        // OPTIMIZED: Use cached categories
+        return Cache::remember('categories_list', 3600, function() {
+            return Category::orderBy('CategoryID','ASC')->get();
+        });
     }
 
     /**
@@ -121,8 +131,9 @@ class SkuDataController extends Controller
      */
     public function show(Sku $sku)
     {
-
-        $images = $sku->images()->get();
+        // OPTIMIZED: Eager load images to avoid N+1 queries
+        $sku->load('images');
+        $images = $sku->images;
 
     }
 
@@ -140,7 +151,10 @@ class SkuDataController extends Controller
           ];
 
           if ($column=='sku'){
-              $data['categories'] = Category::orderBy('CategoryId','ASC')->get();
+              // OPTIMIZED: Use cached categories
+              $data['categories'] = Cache::remember('categories_list', 3600, function() {
+                  return Category::orderBy('CategoryId','ASC')->get();
+              });
           }
       return $data;
 
@@ -227,8 +241,9 @@ class SkuDataController extends Controller
      */
     public function destroy(Sku $sku)
     {
-	if($sku->images){
-	  $sku->images->each->delete();	
+	// OPTIMIZED: Use single query instead of N queries (N+1 fix)
+	if($sku->images()->exists()){
+	  $sku->images()->delete();
 	}
 
         $sku->delete();

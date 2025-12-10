@@ -1037,7 +1037,7 @@ let $tableImages = `
 <div class="row">
     <div class="col-md-2">
          <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="image001">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="image001">
         </a>
     </div>
     <div class="col-md-4">
@@ -1050,7 +1050,7 @@ let $tableImages = `
     </div>
     <div class="col-md-2">
       <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="image002">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="image002">
         </a>
     </div>
     <div class="col-md-4">
@@ -1066,7 +1066,7 @@ let $tableImages = `
 <div class="row">
     <div class="col-md-2">
          <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="image003">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="image003">
         </a>
     </div>
      <div class="col-md-4">
@@ -1079,7 +1079,7 @@ let $tableImages = `
     </div>
     <div class="col-md-2">
       <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="image004">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="image004">
         </a>
     </div>
     <div class="col-md-4">
@@ -1095,7 +1095,7 @@ let $tableImages = `
 <div class="row">
 <div class="col-md-2">
      <a href="#" target="_blank">
-        <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="image005">
+        <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="image005">
     </a>
 </div>
     <div class="col-md-4">
@@ -1108,7 +1108,7 @@ let $tableImages = `
     </div>
     <div class="col-md-2">
       <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="image006">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="image006">
         </a>
     </div>
     <div class="col-md-4">
@@ -1124,7 +1124,7 @@ let $tableImages = `
 <div class="row">
     <div class="col-md-2">
          <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="image007">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="image007">
         </a>
     </div>
      <div class="col-md-4">
@@ -1137,7 +1137,7 @@ let $tableImages = `
     </div>
     <div class="col-md-2">
       <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="image008">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="image008">
         </a>
     </div>
     <div class="col-md-4">
@@ -1153,7 +1153,7 @@ let $tableImages = `
 <div class="row">
     <div class="col-md-2">
          <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="image009">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="image009">
         </a>
     </div>
      <div class="col-md-4">
@@ -1166,7 +1166,7 @@ let $tableImages = `
     </div>
     <div class="col-md-2">
       <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="010">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="010">
         </a>
     </div>
     <div class="col-md-4">
@@ -1182,7 +1182,7 @@ let $tableImages = `
 <div class="row">
     <div class="col-md-2">
          <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="011">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="011">
         </a>
     </div>
      <div class="col-md-4">
@@ -1195,7 +1195,7 @@ let $tableImages = `
     </div>
     <div class="col-md-2">
       <a href="#" target="_blank">
-            <img src="http://remotespict.mitechnologiesinc.com/no_image.png" alt="#" width="100" height="100" id="012">
+            <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" alt="#" width="100" height="100" id="012">
         </a>
     </div>
     <div class="col-md-4">

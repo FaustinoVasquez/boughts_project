@@ -7,6 +7,7 @@ use App\Http\Requests\Clean\createCleanRequest;
 use App\Http\Requests\Clean\updateCleanRequest;
 use App\Sku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 
 class CleanLaunchController extends Controller
@@ -32,17 +33,56 @@ class CleanLaunchController extends Controller
 
     public function getSku()
     {
-        return Sku::select('SKU')->get();
+        // DEPRECATED: Returns empty array - use searchSkus() instead for AJAX
+        return [];
+    }
+
+    /**
+     * AJAX endpoint for SKU search
+     * Used by Select2 dropdowns
+     */
+    public function searchSkus(Request $request)
+    {
+        $term = $request->get('term', '');
+        $page = $request->get('page', 1);
+        $perPage = 20;
+
+        $query = Sku::select('SKU')
+            ->orderBy('SKU', 'ASC');
+
+        if ($term) {
+            $query->where('SKU', 'LIKE', $term . '%');
+        }
+
+        $total = $query->count();
+        $skus = $query->offset(($page - 1) * $perPage)
+            ->limit($perPage)
+            ->get();
+
+        return response()->json([
+            'results' => $skus->map(function($sku) {
+                return ['id' => $sku->SKU, 'text' => $sku->SKU];
+            }),
+            'pagination' => [
+                'more' => ($page * $perPage) < $total
+            ]
+        ]);
     }
 
     public function getBrand()
     {
-        return Sku::select('Manufacturer')->distinct()->get();
+        // OPTIMIZED: Cache manufacturers for 1 hour
+        return Cache::remember('manufacturers_list', 3600, function() {
+            return Sku::select('Manufacturer')->distinct()->get();
+        });
     }
 
     public function getPartNumber()
     {
-        return Clean::select('PartNumber')->distinct()->get();
+        // OPTIMIZED: Cache part numbers for 1 hour
+        return Cache::remember('partnumbers_list', 3600, function() {
+            return Clean::select('PartNumber')->distinct()->get();
+        });
     }
 
     public function store(createCleanRequest $request)

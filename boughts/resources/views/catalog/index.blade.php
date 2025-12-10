@@ -136,7 +136,7 @@
     <script src="{{ asset('library/iCheck/js/icheck.js') }}"></script>
     <script src="{{ asset('library/yadcf/js/jquery.dataTables.yadcf.js') }}"></script>
 
-    <script src="{{ asset('js/_commonFunctions.js') }}"></script>
+    <script src="{{ asset('js/_commonFunctions.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/pages/_fieldsProductSku.js') }}"></script>
     <script src="{{ asset('js/pages/_fieldsClean.js') }}"></script>
 
@@ -785,7 +785,7 @@
                 let item = e.target.attributes['data-item'].value;
                 let myFormData = new FormData();
                 myFormData.append('pictureFile', image);
-                myFormData.append('url', 'http://remotespict.mitechnologiesinc.com');
+                myFormData.append('url', 'https://d2tmwtn0gh4496.cloudfront.net');
                 myFormData.append('id', id);
                 myFormData.append('name', name);
                 myFormData.append('item', item);
@@ -833,7 +833,7 @@
                 let id = $(this).data("id");
                 let sku = $(this).data("sku");
                 let num = $(this).data("num");
-                let noImage = 'http://remotespict.mitechnologiesinc.com/no_image.png';
+                let noImage = 'https://d2tmwtn0gh4496.cloudfront.net/no_image.png';
                 let token = $("meta[name='csrf-token']").attr("content");
 
                 $.confirm({

@@ -203,9 +203,9 @@ function getImages(sku){
             }else{
                 myRows +=`<div class="row">
                 <div class="col-md-3">
-                    <a href="http://remotespict.mitechnologiesinc.com/no_image.png" 
+                    <a href="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" 
                        target="_blank" id="a-${addzeros(i + 1, 3)}">
-                        <img src="http://remotespict.mitechnologiesinc.com/no_image.png" 
+                        <img src="https://d2tmwtn0gh4496.cloudfront.net/no_image.png" 
                         alt="#" 
                         style="width: 108px;height:66px " 
                         id="image-${addzeros(i + 1, 3)}">
@@ -322,3 +322,4 @@ function cleanData(d){
         </div>
         `;
 }
+// Cache bust: Wed Oct 15 12:47:45 PM PDT 2025

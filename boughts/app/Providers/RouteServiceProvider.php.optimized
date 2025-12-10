@@ -1,0 +1,17 @@
+<?php
+// OPTIMIZATION NOTE: Add this to RouteServiceProvider to eager load relationships automatically
+// This prevents N+1 queries when route model binding is used
+
+// In the boot() method, add:
+
+public function boot()
+{
+    parent::boot();
+
+    // Eager load category when binding Sku model
+    Route::bind('sku', function ($value) {
+        return \App\Sku::with('category', 'images')->where('SKU', $value)->firstOrFail();
+    });
+
+    // You can add similar bindings for other models as needed
+}

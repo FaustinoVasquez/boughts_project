@@ -68,9 +68,11 @@ return [
             'host' => env('SFTP_HOST'),
             'username' => env('SFTP_USERNAME'),
             'password' => env('SFTP_PASSWORD'),
-            //'root' => '/Mitnas-Mx/HTTP/remotes',
-	    'root' => '/boughts/',
-            'directoryPerm' => 0775
+            'root' => '/boughts/',
+            'visibility' => 'public',
+            'directory_visibility' => 'public',
+            'timeout' => 30,
+            'throw' => false,
         ],
 
     ],

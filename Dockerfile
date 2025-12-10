@@ -1,5 +1,5 @@
-# Use PHP 7.2 FPM as the base image
-FROM php:7.2-fpm
+# Use PHP 8.2 FPM as the base image (upgraded from 8.1 for Laravel 11 support)
+FROM php:8.2-fpm
 
 # Set the environment to non-interactive for package installations
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,20 +18,24 @@ RUN apt-get update && apt-get install -y \
         libjpeg62-turbo-dev \
         libonig-dev \
         gnupg && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install -j$(nproc) xml mbstring curl zip intl soap bcmath gd && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install the Microsoft ODBC driver for SQL Server and required dependencies
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
-    curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
-    apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17 unixodbc-dev
+# Updated for PHP 8.2 / Debian (apt-key is deprecated)
+RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /etc/apt/trusted.gpg.d/microsoft.gpg && \
+    echo "deb [arch=amd64,arm64,armhf] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/mssql-release.list && \
+    apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql18 unixodbc-dev
 
-# Install the sqlsrv and pdo_sqlsrv extensions
-RUN pecl install sqlsrv-5.2.0 pdo_sqlsrv-5.2.0
+# Install the sqlsrv and pdo_sqlsrv extensions (latest versions for PHP 8.2)
+RUN pecl install sqlsrv pdo_sqlsrv
 
 # Enable the sqlsrv and pdo_sqlsrv extensions
 RUN docker-php-ext-enable sqlsrv pdo_sqlsrv
+
+# Install Redis extension for caching (latest version for PHP 8.2)
+RUN pecl install redis && docker-php-ext-enable redis
 
 # Ensure PHP-FPM listens on port 9000
 RUN sed -i 's|^listen = .*|listen = 0.0.0.0:9000|' /usr/local/etc/php-fpm.d/www.conf
